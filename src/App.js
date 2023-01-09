@@ -7,7 +7,6 @@ import { FormStepContext } from './utils/contexts/FormStepContext'
 import { useEffect, useState } from 'react'
 import { FormFieldsContext } from './utils/contexts/FormFieldsContext'
 import axios from 'axios'
-import PersonalInfo from './components/PersonalInfo'
 
 function App() {
     const [step, setStep] = useState(STEPS.SIGN_UP)
@@ -35,7 +34,6 @@ function App() {
                 <Page>
                     <Header />
                     {getCurrentForm(step, validationSchema)}
-                    {/* <PersonalInfo/> */}
                     <Footer />
                 </Page>
                 </FormFieldsContext.Provider>

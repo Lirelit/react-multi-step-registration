@@ -9,6 +9,7 @@ import {
     Flex,
     Button,
     SelectField,
+    InputFieldCheckbox,
 } from '../utils/styles'
 import { useFormStateContext } from '../utils/hooks'
 
@@ -111,7 +112,7 @@ function PersonalInfo(props) {
                 </Flex>
                 <div className='radio-input-wrap'>
                     <InputField
-                        radio
+                        noshadow
                         {...register('sex', {
                             required: 'Sex is required',
                         })}
@@ -121,9 +122,8 @@ function PersonalInfo(props) {
                         value='Male'
                     />
                     <InputLabel htmlFor='male' children='Male'></InputLabel>
-
                     <InputField
-                        radio
+                        noshadow
                         {...register('sex', {
                             required: 'Sex is required',
                         })}
@@ -133,9 +133,8 @@ function PersonalInfo(props) {
                         value='Female'
                     />
                     <InputLabel htmlFor='female' children='Female' />
-
                     <InputField
-                        radio
+                        noshadow
                         {...register('sex', {
                             required: 'Sex is required',
                         })}
@@ -215,6 +214,39 @@ function PersonalInfo(props) {
                 </SelectField>
             </InputContainer>
 
+            <InputContainer error={errors.hobby}>
+                <Flex
+                    style={{ marginBottom: '10px' }}
+                    justifyContent='space-between'
+                    alignItems='center'
+                >
+                    <InputLabel htmlFor='hobby' children='Hobby' />
+                    {errors.hobby && (
+                        <InputError children={errors?.hobby?.message} />
+                    )}
+                </Flex>
+                {props?.validationSchema?.hobby?.anyOf.map((item) => {
+                    return (
+                        <InputLabel className='checkbox-label' htmlFor={item}>
+                            <InputFieldCheckbox
+                                style={{ width: '25%' }}
+                                noshadow
+                                type='checkbox'
+                                id={item}
+                                value={item}
+                                {...register('hobby', {
+                                    required: {
+                                        value: props?.validationSchema?.hobby
+                                            ?.required,
+                                        message: 'Hobby is required',
+                                    },
+                                })}
+                            />
+                            {item}{' '}
+                        </InputLabel>
+                    )
+                })}
+            </InputContainer>
             <div className='btn-wrap'>
                 <Button children='Back' onClick={goBack} secondary />
                 <Button children='Complete' />

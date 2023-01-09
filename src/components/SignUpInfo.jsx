@@ -27,9 +27,6 @@ function SignUpInfo(props) {
         },
     })
 
-    console.log(props)
-    console.log(props.validationSchema?.password?.minLength);
-
     const onSubmit = (data) => {
         console.log(data)
         updateFields(FIELDS.CONTACT, data)

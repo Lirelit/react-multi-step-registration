@@ -1,7 +1,6 @@
 import React from 'react'
 import { useFormStateContext } from '../utils/hooks'
 import {
-    InputField,
     InputContainer,
     InputLabel,
     Flex,
@@ -10,8 +9,7 @@ import {
 } from '../utils/styles'
 
 function Success() {
-    const { setStep, updateFields, fields } = useFormStateContext()
-    console.log(fields)
+    const {fields } = useFormStateContext()
 
     return (
         <form className='flex-wrap content-position'>
@@ -60,6 +58,15 @@ function Success() {
                         <InputLabel children='Ocean' />
                     </Flex>
                     <InputFieldDetails children={fields?.personalInfo?.ocean} />
+                </InputContainer>
+                <InputContainer>
+                    <Flex justifyContent='space-between' alignItems='center'>
+                        <InputLabel children='Hobby' />
+                    </Flex>
+                    {fields?.personalInfo?.hobby.map((item) => {
+                        return <InputFieldDetails children={item} />
+                    })}
+                    
                 </InputContainer>
             </div>
             <Button children='Done' />
