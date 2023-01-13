@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFormStateContext } from '../utils/hooks'
 import {
-    InputContainer,
+    FieldContainer,
     InputLabel,
     Flex,
     Button,
@@ -9,12 +9,12 @@ import {
 } from '../utils/styles'
 
 function Success() {
-    const {fields } = useFormStateContext()
+    const { fields } = useFormStateContext()
 
     return (
         <form className='flex-wrap content-position'>
             <div>
-                <InputContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Mobile Phone' />
                     </Flex>
@@ -22,52 +22,57 @@ function Success() {
                         children={fields?.contact?.mobilePhone}
                         id='mobilePhone'
                     />
-                </InputContainer>
-                <InputContainer>
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Email' />
                     </Flex>
                     <InputFieldDetails children={fields?.contact?.email} />
-                </InputContainer>
-                <InputContainer>
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='First name' />
                     </Flex>
-                    <InputFieldDetails children={fields?.personalInfo?.firstName} />
-                </InputContainer>
-                <InputContainer>
+                    <InputFieldDetails
+                        children={fields?.personalInfo?.firstName}
+                    />
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Last name' />
                     </Flex>
-                    <InputFieldDetails children={fields?.personalInfo?.lastName} />
-                </InputContainer>
-                <InputContainer>
+                    <InputFieldDetails
+                        children={fields?.personalInfo?.lastName}
+                    />
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Sex' />
                     </Flex>
                     <InputFieldDetails children={fields?.personalInfo?.sex} />
-                </InputContainer>
-                <InputContainer>
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Birthday' />
                     </Flex>
-                    <InputFieldDetails children={fields?.personalInfo?.birthday} />
-                </InputContainer>
-                <InputContainer>
+                    <InputFieldDetails
+                        children={fields?.personalInfo?.birthday}
+                    />
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Ocean' />
                     </Flex>
                     <InputFieldDetails children={fields?.personalInfo?.ocean} />
-                </InputContainer>
-                <InputContainer>
+                </FieldContainer>
+                <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Hobby' />
                     </Flex>
                     {fields?.personalInfo?.hobby.map((item) => {
                         return <InputFieldDetails children={item} />
                     })}
-                    
-                </InputContainer>
+                </FieldContainer>
             </div>
             <Button children='Done' />
         </form>

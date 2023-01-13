@@ -10,6 +10,8 @@ import {
     Button,
     SelectField,
     InputFieldCheckbox,
+    InputFieldRadio,
+    CheckboxLabel,
 } from '../utils/styles'
 import { useFormStateContext } from '../utils/hooks'
 
@@ -42,6 +44,20 @@ function PersonalInfo(props) {
     const onError = (errors, event) => {
         console.log(errors)
         console.log(event)
+    }
+
+    const sex = ['Male', 'Female', 'Other']
+
+    const validateBirthday = () => {
+        console.log(watch('birthday'))
+        let currentData = new Date()
+        let birthdayData = new Date(watch('birthday'))
+        let years = (currentData - birthdayData) / 3.154e10
+        if (years < props.validationSchema?.birthday?.minAge) {
+            return `min age ${props.validationSchema?.birthday?.minAge}`
+        } else if (years >= props.validationSchema?.birthday?.maxAge) {
+            return `max age ${props.validationSchema?.birthday?.maxAge}`
+        }
     }
 
     return (
@@ -110,41 +126,23 @@ function PersonalInfo(props) {
                         <InputError children={errors?.sex?.message} />
                     )}
                 </Flex>
-                <div className='radio-input-wrap'>
-                    <InputField
-                        noshadow
-                        {...register('sex', {
-                            required: 'Sex is required',
-                        })}
-                        id='male'
-                        type='radio'
-                        name='sex'
-                        value='Male'
-                    />
-                    <InputLabel htmlFor='male' children='Male'></InputLabel>
-                    <InputField
-                        noshadow
-                        {...register('sex', {
-                            required: 'Sex is required',
-                        })}
-                        id='female'
-                        type='radio'
-                        name='sex'
-                        value='Female'
-                    />
-                    <InputLabel htmlFor='female' children='Female' />
-                    <InputField
-                        noshadow
-                        {...register('sex', {
-                            required: 'Sex is required',
-                        })}
-                        id='other'
-                        type='radio'
-                        name='sex'
-                        value='Other'
-                    />
-                    <InputLabel htmlFor='other' children='Other' />
-                </div>
+                    {sex.map((item) => (
+                        <CheckboxLabel   
+                            key={item}
+                            htmlFor={item}
+                        >
+                            <InputFieldRadio
+                                {...register('sex', {
+                                    required: 'Sex is required',
+                                })}
+                                id={item}
+                                type='radio'
+                                name='sex'
+                                value={item}
+                            />
+                            {item}
+                        </CheckboxLabel>
+                    ))}
             </InputContainer>
             <InputContainer error={errors.birthday}>
                 <Flex justifyContent='space-between' alignItems='center'>
@@ -160,29 +158,7 @@ function PersonalInfo(props) {
                             value: props.validationSchema?.birthday?.required,
                             message: 'Birthday is required',
                         },
-                        validate: () => {
-                            let currentData = new Date(Date.now())
-                                .toISOString()
-                                .slice(0, 10)
-                                .replaceAll('-', '')
-                            let birthdayData = watch('birthday').replaceAll(
-                                '-',
-                                ''
-                            )
-                            let years = Math.floor(
-                                (currentData - birthdayData) * 0.0001
-                            )
-                            if (
-                                years < props.validationSchema?.birthday?.minAge
-                            ) {
-                                return `min age ${props.validationSchema?.birthday?.minAge}`
-                            } else if (
-                                years >=
-                                props.validationSchema?.birthday?.maxAge
-                            ) {
-                                return `max age ${props.validationSchema?.birthday?.maxAge}`
-                            }
-                        },
+                        validate: validateBirthday,
                     })}
                     id='birthday'
                 />
@@ -209,7 +185,12 @@ function PersonalInfo(props) {
                 >
                     <option value=''>-Select- </option>
                     {props?.validationSchema?.ocean?.oneOf.map((item) => {
-                        return <option value={item}> {item}</option>
+                        return (
+                            <option key={item} value={item}>
+                                {' '}
+                                {item}
+                            </option>
+                        )
                     })}
                 </SelectField>
             </InputContainer>
@@ -227,10 +208,11 @@ function PersonalInfo(props) {
                 </Flex>
                 {props?.validationSchema?.hobby?.anyOf.map((item) => {
                     return (
-                        <InputLabel className='checkbox-label' htmlFor={item}>
+                        <CheckboxLabel
+                            htmlFor={item}
+                            key={item}
+                        >
                             <InputFieldCheckbox
-                                style={{ width: '25%' }}
-                                noshadow
                                 type='checkbox'
                                 id={item}
                                 value={item}
@@ -242,8 +224,8 @@ function PersonalInfo(props) {
                                     },
                                 })}
                             />
-                            {item}{' '}
-                        </InputLabel>
+                            {item}
+                        </CheckboxLabel>
                     )
                 })}
             </InputContainer>
