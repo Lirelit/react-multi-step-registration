@@ -59,20 +59,20 @@ function Success() {
                         children={fields?.personalInfo?.birthday}
                     />
                 </FieldContainer>
-                <FieldContainer>
+                {fields.personalInfo.ocean && <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Ocean' />
                     </Flex>
                     <InputFieldDetails children={fields?.personalInfo?.ocean} />
-                </FieldContainer>
-                <FieldContainer>
+                </FieldContainer>}
+                {fields.personalInfo.hobby && <FieldContainer>
                     <Flex justifyContent='space-between' alignItems='center'>
                         <InputLabel children='Hobby' />
                     </Flex>
                     {fields?.personalInfo?.hobby.map((item) => {
                         return <InputFieldDetails children={item} />
                     })}
-                </FieldContainer>
+                </FieldContainer>}
             </div>
             <Button children='Done' />
         </form>

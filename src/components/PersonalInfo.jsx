@@ -126,23 +126,24 @@ function PersonalInfo(props) {
                         <InputError children={errors?.sex?.message} />
                     )}
                 </Flex>
-                    {sex.map((item) => (
-                        <CheckboxLabel   
-                            key={item}
-                            htmlFor={item}
-                        >
-                            <InputFieldRadio
-                                {...register('sex', {
-                                    required: 'Sex is required',
-                                })}
-                                id={item}
-                                type='radio'
-                                name='sex'
-                                value={item}
-                            />
-                            {item}
-                        </CheckboxLabel>
-                    ))}
+                {sex.map((item) => (
+                    <CheckboxLabel key={item} htmlFor={item}>
+                        <InputFieldRadio
+                            {...register('sex', {
+                                required: {
+                                    value: props.validationSchema?.sex
+                                        ?.required,
+                                    message: 'Sex is required',
+                                },
+                            })}
+                            id={item}
+                            type='radio'
+                            name='sex'
+                            value={item}
+                        />
+                        {item}
+                    </CheckboxLabel>
+                ))}
             </InputContainer>
             <InputContainer error={errors.birthday}>
                 <Flex justifyContent='space-between' alignItems='center'>
@@ -164,71 +165,71 @@ function PersonalInfo(props) {
                 />
             </InputContainer>
 
-            <InputContainer error={errors.ocean}>
-                <Flex justifyContent='space-between' alignItems='center'>
-                    <InputLabel
-                        htmlFor='ocean'
-                        children='Your Favorite Ocean'
-                    />
-                    {errors.ocean && (
-                        <InputError children={errors?.ocean?.message} />
-                    )}
-                </Flex>
-                <SelectField
-                    id='ocean'
-                    {...register('ocean', {
-                        required: {
-                            value: props.validationSchema?.ocean?.required,
-                            message: 'Ocean is required',
-                        },
-                    })}
-                >
-                    <option value=''>-Select- </option>
-                    {props?.validationSchema?.ocean?.oneOf.map((item) => {
+            {props?.validationSchema?.ocean && (
+                <InputContainer error={errors.ocean}>
+                    <Flex justifyContent='space-between' alignItems='center'>
+                        <InputLabel
+                            htmlFor='ocean'
+                            children='Your Favorite Ocean'
+                        />
+                        {errors.ocean && (
+                            <InputError children={errors?.ocean?.message} />
+                        )}
+                    </Flex>
+                    <SelectField
+                        id='ocean'
+                        {...register('ocean', {
+                            required: {
+                                value: props.validationSchema?.ocean?.required,
+                                message: 'Ocean is required',
+                            },
+                        })}
+                    >
+                        <option value=''>-Select- </option>
+                        {props?.validationSchema?.ocean?.oneOf.map((item) => {
+                            return (
+                                <option key={item} value={item}>
+                                    {item}
+                                </option>
+                            )
+                        })}
+                    </SelectField>
+                </InputContainer>
+            )}
+
+            {props.validationSchema.hobby && (
+                <InputContainer error={errors.hobby}>
+                    <Flex
+                        style={{ marginBottom: '10px' }}
+                        justifyContent='space-between'
+                        alignItems='center'
+                    >
+                        <InputLabel htmlFor='hobby' children='Hobby' />
+                        {errors.hobby && (
+                            <InputError children={errors?.hobby?.message} />
+                        )}
+                    </Flex>
+                    {props?.validationSchema?.hobby?.anyOf.map((item) => {
                         return (
-                            <option key={item} value={item}>
-                                {' '}
+                            <CheckboxLabel htmlFor={item} key={item}>
+                                <InputFieldCheckbox
+                                    type='checkbox'
+                                    id={item}
+                                    value={item}
+                                    {...register('hobby', {
+                                        required: {
+                                            value: props?.validationSchema
+                                                ?.hobby?.required,
+                                            message: 'Hobby is required',
+                                        },
+                                    })}
+                                />
                                 {item}
-                            </option>
+                            </CheckboxLabel>
                         )
                     })}
-                </SelectField>
-            </InputContainer>
-
-            <InputContainer error={errors.hobby}>
-                <Flex
-                    style={{ marginBottom: '10px' }}
-                    justifyContent='space-between'
-                    alignItems='center'
-                >
-                    <InputLabel htmlFor='hobby' children='Hobby' />
-                    {errors.hobby && (
-                        <InputError children={errors?.hobby?.message} />
-                    )}
-                </Flex>
-                {props?.validationSchema?.hobby?.anyOf.map((item) => {
-                    return (
-                        <CheckboxLabel
-                            htmlFor={item}
-                            key={item}
-                        >
-                            <InputFieldCheckbox
-                                type='checkbox'
-                                id={item}
-                                value={item}
-                                {...register('hobby', {
-                                    required: {
-                                        value: props?.validationSchema?.hobby
-                                            ?.required,
-                                        message: 'Hobby is required',
-                                    },
-                                })}
-                            />
-                            {item}
-                        </CheckboxLabel>
-                    )
-                })}
-            </InputContainer>
+                </InputContainer>
+            )}
             <div className='btn-wrap'>
                 <Button children='Back' onClick={goBack} secondary />
                 <Button children='Complete' />

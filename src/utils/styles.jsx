@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 
+
 export const Page = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,11 +24,14 @@ export const InputField = styled.input`
     ${BaseInputStyles}
     -webkit-box-shadow: inset 0 0 0 50px #212121;
 `
+export const ReactInputMask = styled.input`
+    ${BaseInputStyles}
+    -webkit-box-shadow: inset 0 0 0 50px #212121;
+`
 
 export const InputFieldRadio = styled.input`
     ${BaseInputStyles}
     width: 25%;
-
     cursor: pointer;
 `
 
@@ -73,13 +77,6 @@ export const InputContainer = styled.div`
         props.error &&
         css`
             border: 1px solid red;
-        `}
-    ${(props) =>
-        props.radio &&
-        css`
-            border: none;
-            background-color: inherit;
-            width: 100%;
         `}
 `
 
