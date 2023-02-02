@@ -1,7 +1,7 @@
 import InputMask from 'react-input-mask'
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { defaultFields, FIELDS, STEPS } from '../utils/constants'
+import { FIELDS, STEPS } from '../utils/constants'
 import {
     InputField,
     InputError,
@@ -10,7 +10,7 @@ import {
     Flex,
     Button,
 } from '../utils/styles'
-import { useFormStateContext } from '../utils/hooks'
+import { useFormStateContext } from '../utils/hooks' 
 
 function SignUpInfo(props) {
     const { setStep, updateFields, fields } = useFormStateContext()
@@ -28,7 +28,6 @@ function SignUpInfo(props) {
     })
 
     const onSubmit = (data) => {
-        console.log(data)
         updateFields(FIELDS.CONTACT, data)
         setStep(STEPS.PERSONAL)
     }
@@ -95,33 +94,6 @@ function SignUpInfo(props) {
                     </InputContainer>
                 )}
             />
-
-            {/* <InputContainer error={errors.mobilePhone}>
-                <Flex justifyContent='space-between' alignItems='center'>
-                    <InputLabel htmlFor='mobilePhone' children='Mobile Phone' />
-                    {errors.mobilePhone && (
-                        <InputError
-                            children={
-                                errors?.mobilePhone?.message ||
-                                errors?.mobilePhone?.minLength.message ||
-                                errors?.mobilePhone.maxLength.message
-                            }
-                        />
-                    )}
-                </Flex>
-                <InputField   
-                    type='tel'
-                    mask='+375999999999'
-                    {...register('mobilePhone', {
-                        required: 'Mobile Phone is required',
-                        pattern: {
-                            value: /^\+375\d{9}$/,
-                            message: 'Invalid mobile phone',
-                        },
-                    })}
-                    id='mobilePhone'
-                />
-            </InputContainer> */}
             <InputContainer error={errors.email}>
                 <Flex justifyContent='space-between' alignItems='center'>
                     <InputLabel htmlFor='email' children='Email' />

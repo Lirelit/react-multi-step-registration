@@ -70,7 +70,7 @@ function Success() {
                         <InputLabel children='Hobby' />
                     </Flex>
                     {fields?.personalInfo?.hobby.map((item) => {
-                        return <InputFieldDetails children={item} />
+                        return <InputFieldDetails key={item} children={item} />
                     })}
                 </FieldContainer>}
             </div>

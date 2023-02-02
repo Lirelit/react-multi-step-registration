@@ -7,6 +7,7 @@ import { FormStepContext } from './utils/contexts/FormStepContext'
 import { useEffect, useState } from 'react'
 import { FormFieldsContext } from './utils/contexts/FormFieldsContext'
 import axios from 'axios'
+import BreadCrumbs, { getCurrentCrumbs } from './components/BreadCrumbs'
 
 function App() {
     const [step, setStep] = useState(STEPS.SIGN_UP)
@@ -28,17 +29,16 @@ function App() {
     }, [])
 
     return (
-        <div>
             <FormStepContext.Provider value={{ step, setStep }}>
                 <FormFieldsContext.Provider value={{fields, updateFields}}>
                 <Page>
                     <Header />
+                    {getCurrentCrumbs(step, setStep)}
                     {getCurrentForm(step, validationSchema)}
                     <Footer />
                 </Page>
                 </FormFieldsContext.Provider>
             </FormStepContext.Provider>
-        </div>
     )
 }
 

@@ -13,9 +13,9 @@ import {
     InputFieldRadio,
     CheckboxLabel,
 } from '../utils/styles'
-import { useFormStateContext } from '../utils/hooks'
+import { useFormStateContext } from '../utils/hooks' 
 
-function PersonalInfo(props) {
+function PersonalInfo(props) { 
     const { setStep, updateFields, fields } = useFormStateContext()
     const {
         register,
@@ -30,12 +30,9 @@ function PersonalInfo(props) {
     })
 
     const onSubmit = (data) => {
-        console.log(data)
         updateFields(FIELDS.PERSONAL, data)
         setStep(STEPS.SUCCESS)
     }
-
-    console.log(fields)
 
     const goBack = () => {
         setStep(STEPS.SIGN_UP)
@@ -49,7 +46,6 @@ function PersonalInfo(props) {
     const sex = ['Male', 'Female', 'Other']
 
     const validateBirthday = () => {
-        console.log(watch('birthday'))
         let currentData = new Date()
         let birthdayData = new Date(watch('birthday'))
         let years = (currentData - birthdayData) / 3.154e10
