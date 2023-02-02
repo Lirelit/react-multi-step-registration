@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-multi-step-registration/static/css/main.c33abc26.css",
-    "main.js": "/react-multi-step-registration/static/js/main.8be1c741.js",
+    "main.js": "/react-multi-step-registration/static/js/main.a841dc90.js",
     "index.html": "/react-multi-step-registration/index.html",
     "main.c33abc26.css.map": "/react-multi-step-registration/static/css/main.c33abc26.css.map",
-    "main.8be1c741.js.map": "/react-multi-step-registration/static/js/main.8be1c741.js.map"
+    "main.a841dc90.js.map": "/react-multi-step-registration/static/js/main.a841dc90.js.map"
   },
   "entrypoints": [
     "static/css/main.c33abc26.css",
-    "static/js/main.8be1c741.js"
+    "static/js/main.a841dc90.js"
   ]
 }
